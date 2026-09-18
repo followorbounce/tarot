@@ -1,7 +1,8 @@
 const cardEl = document.getElementById("card");
 const drawBtn = document.getElementById("draw-btn");
+const imageEl = document.getElementById("card-image");
+const numEl = document.getElementById("card-num");
 const nameEl = document.getElementById("card-name");
-const symbolEl = document.getElementById("card-symbol");
 const orientationEl = document.getElementById("card-orientation");
 const meaningEl = document.getElementById("card-meaning");
 
@@ -13,7 +14,9 @@ function drawCard() {
 
   // Let the back-face show briefly before revealing the new card.
   setTimeout(() => {
-    symbolEl.textContent = card.symbol;
+    imageEl.src = card.img;
+    imageEl.alt = card.name;
+    numEl.textContent = card.num;
     nameEl.textContent = card.name;
     orientationEl.textContent = reversed ? "Reversed" : "Upright";
     meaningEl.textContent = reversed ? card.rev : card.up;
