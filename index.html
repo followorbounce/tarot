@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarot Draw</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Tarot Draw</h1>
+    <p class="subtitle">Draw a single card from the standard 78-card deck</p>
+
+    <div class="stage">
+      <div class="card" id="card">
+        <div class="card-inner">
+          <div class="card-face card-back">
+            <span class="back-symbol">✦</span>
+          </div>
+          <div class="card-face card-front">
+            <div class="card-symbol" id="card-symbol"></div>
+            <div class="card-name" id="card-name"></div>
+            <div class="card-orientation" id="card-orientation"></div>
+            <div class="card-meaning" id="card-meaning"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="draw-btn">Draw a card</button>
+  </main>
+
+  <script src="cards.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

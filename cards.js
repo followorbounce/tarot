@@ -1,0 +1,110 @@
+// Standard 78-card Rider-Waite-Smith tarot deck.
+const CARDS = [
+  // Major Arcana
+  { name: "The Fool", arcana: "major", num: "0", symbol: "✦", up: "new beginnings, spontaneity, faith, innocence, a leap of faith", rev: "recklessness, hesitancy, missed opportunity, poor judgment" },
+  { name: "The Magician", arcana: "major", num: "I", symbol: "✦", up: "manifestation, resourcefulness, power, inspired action", rev: "manipulation, poor planning, untapped talents" },
+  { name: "The High Priestess", arcana: "major", num: "II", symbol: "✦", up: "intuition, mystery, the subconscious, inner voice", rev: "secrets withheld, disconnection from intuition, repressed feelings" },
+  { name: "The Empress", arcana: "major", num: "III", symbol: "✦", up: "abundance, nurturing, fertility, nature", rev: "creative block, dependence, smothering" },
+  { name: "The Emperor", arcana: "major", num: "IV", symbol: "✦", up: "authority, structure, control, fatherhood", rev: "domination, rigidity, lack of discipline" },
+  { name: "The Hierophant", arcana: "major", num: "V", symbol: "✦", up: "tradition, convention, institutions, belief systems", rev: "rebellion, unconventionality, challenging the status quo" },
+  { name: "The Lovers", arcana: "major", num: "VI", symbol: "✦", up: "love, harmony, relationships, choices", rev: "disharmony, imbalance, misaligned values" },
+  { name: "The Chariot", arcana: "major", num: "VII", symbol: "✦", up: "willpower, victory, determination, direction", rev: "lack of control, opposition, scattered energy" },
+  { name: "Strength", arcana: "major", num: "VIII", symbol: "✦", up: "courage, patience, compassion, inner strength", rev: "self-doubt, weakness, insecurity" },
+  { name: "The Hermit", arcana: "major", num: "IX", symbol: "✦", up: "introspection, solitude, inner guidance", rev: "isolation, loneliness, withdrawal" },
+  { name: "Wheel of Fortune", arcana: "major", num: "X", symbol: "✦", up: "cycles, fate, a turning point, luck", rev: "bad luck, resistance to change, breaking cycles" },
+  { name: "Justice", arcana: "major", num: "XI", symbol: "✦", up: "fairness, truth, cause and effect, law", rev: "unfairness, dishonesty, lack of accountability" },
+  { name: "The Hanged Man", arcana: "major", num: "XII", symbol: "✦", up: "surrender, new perspective, letting go", rev: "stalling, resistance, needless sacrifice" },
+  { name: "Death", arcana: "major", num: "XIII", symbol: "✦", up: "endings, transformation, transition", rev: "resistance to change, stagnation, fear of endings" },
+  { name: "Temperance", arcana: "major", num: "XIV", symbol: "✦", up: "balance, moderation, patience, purpose", rev: "imbalance, excess, lack of harmony" },
+  { name: "The Devil", arcana: "major", num: "XV", symbol: "✦", up: "bondage, addiction, materialism, the shadow self", rev: "breaking free, release, reclaiming power" },
+  { name: "The Tower", arcana: "major", num: "XVI", symbol: "✦", up: "sudden change, upheaval, revelation", rev: "avoiding disaster, delayed upheaval, fear of change" },
+  { name: "The Star", arcana: "major", num: "XVII", symbol: "✦", up: "hope, faith, renewal, inspiration", rev: "despair, disconnection, lack of faith" },
+  { name: "The Moon", arcana: "major", num: "XVIII", symbol: "✦", up: "illusion, fear, anxiety, the subconscious", rev: "release of fear, repressed emotion surfacing, confusion clearing" },
+  { name: "The Sun", arcana: "major", num: "XIX", symbol: "✦", up: "joy, success, vitality, positivity", rev: "temporary sadness, inner child wounds, lack of clarity" },
+  { name: "Judgement", arcana: "major", num: "XX", symbol: "✦", up: "reflection, reckoning, awakening, rebirth", rev: "self-doubt, refusal of self-examination, ignoring the call" },
+  { name: "The World", arcana: "major", num: "XXI", symbol: "✦", up: "completion, integration, accomplishment", rev: "incompletion, lack of closure, shortcuts" },
+
+  // Minor Arcana — Wands
+  ...minorSuit("Wands", "♣", [
+    ["Ace", "inspiration, new opportunity, growth", "delays, lack of motivation, missed opportunity"],
+    ["Two", "planning, decisions, discovery", "fear of the unknown, playing it safe, lack of planning"],
+    ["Three", "expansion, foresight, progress", "delays, obstacles, lack of foresight"],
+    ["Four", "celebration, harmony, homecoming", "instability, conflict at home, lack of support"],
+    ["Five", "conflict, competition, tension", "avoiding conflict, inner tension, resolving differences"],
+    ["Six", "victory, recognition, success", "self-doubt, fall from grace, egotism"],
+    ["Seven", "perseverance, defensiveness, standing your ground", "overwhelmed, giving up, exhaustion"],
+    ["Eight", "swift action, movement, alignment", "delays, frustration, resisting change"],
+    ["Nine", "resilience, persistence, boundaries", "exhaustion, defensiveness, paranoia"],
+    ["Ten", "burden, responsibility, hard work", "overwhelm, delegation, burnout"],
+    ["Page", "exploration, excitement, free spirit", "lack of direction, procrastination, haste"],
+    ["Knight", "energy, passion, adventure", "impulsiveness, recklessness, haste"],
+    ["Queen", "confidence, courage, determination", "self-doubt, jealousy, insecurity"],
+    ["King", "leadership, vision, entrepreneurship", "impulsiveness, high expectations, ruthlessness"],
+  ]),
+
+  // Minor Arcana — Cups
+  ...minorSuit("Cups", "♥", [
+    ["Ace", "new feelings, intuition, love", "emotional loss, blocked creativity, emptiness"],
+    ["Two", "unity, partnership, attraction", "imbalance, broken communication, tension"],
+    ["Three", "friendship, celebration, community", "overindulgence, gossip, isolation"],
+    ["Four", "apathy, contemplation, disconnection", "sudden awareness, choosing happiness, boredom"],
+    ["Five", "loss, grief, regret", "acceptance, moving on, finding peace"],
+    ["Six", "nostalgia, memories, reunion", "stuck in the past, unrealistic expectations"],
+    ["Seven", "choices, illusion, wishful thinking", "clarity, alignment, overcoming temptation"],
+    ["Eight", "walking away, disillusionment, seeking truth", "avoidance, fear of moving on, stagnation"],
+    ["Nine", "contentment, satisfaction, gratitude", "overindulgence, emptiness despite success"],
+    ["Ten", "harmony, fulfillment, family", "broken family, disconnection, unrealistic expectations"],
+    ["Page", "creativity, intuition, curiosity", "emotional immaturity, escapism, blocked creativity"],
+    ["Knight", "romance, charm, imagination", "moodiness, unrealistic expectations, disappointment"],
+    ["Queen", "compassion, intuition, emotional security", "insecurity, dependence, martyrdom"],
+    ["King", "emotional balance, diplomacy, compassion", "moodiness, manipulation, emotional volatility"],
+  ]),
+
+  // Minor Arcana — Swords
+  ...minorSuit("Swords", "♠", [
+    ["Ace", "clarity, breakthrough, a new idea", "confusion, chaos, miscommunication"],
+    ["Two", "a difficult decision, stalemate, avoidance", "indecision, confusion, information overload"],
+    ["Three", "heartbreak, grief, pain", "healing, forgiveness, moving on"],
+    ["Four", "rest, recovery, contemplation", "restlessness, burnout, stagnation"],
+    ["Five", "conflict, defeat, winning at all costs", "reconciliation, resentment, moving past conflict"],
+    ["Six", "transition, moving on, leaving hardship behind", "resistance to change, unresolved issues"],
+    ["Seven", "deception, strategy, sneakiness", "coming clean, self-deceit, getting caught"],
+    ["Eight", "restriction, self-imposed limits, victim mentality", "self-empowerment, releasing limiting beliefs"],
+    ["Nine", "anxiety, worry, nightmares", "hope, releasing fear, reaching out for help"],
+    ["Ten", "painful endings, betrayal, rock bottom", "recovery, resisting an inevitable end"],
+    ["Page", "curiosity, restlessness, mental energy", "gossip, haste, lack of tact"],
+    ["Knight", "action, impulsiveness, ambition", "recklessness, unpredictability, burnout"],
+    ["Queen", "independence, clear boundaries, direct communication", "coldness, bitterness, harsh judgment"],
+    ["King", "authority, truth, intellectual power", "manipulation, abuse of power, tyranny"],
+  ]),
+
+  // Minor Arcana — Pentacles
+  ...minorSuit("Pentacles", "♦", [
+    ["Ace", "new opportunity, prosperity, manifestation", "missed opportunity, lack of planning, scarcity"],
+    ["Two", "balance, adaptability, juggling priorities", "overwhelm, disorganization, imbalance"],
+    ["Three", "teamwork, collaboration, skill", "lack of teamwork, disorganization, competing goals"],
+    ["Four", "security, control, saving", "greed, materialism, letting go"],
+    ["Five", "hardship, isolation, financial loss", "recovery, support, spiritual poverty"],
+    ["Six", "generosity, giving and receiving, charity", "strings attached, debt, one-sided generosity"],
+    ["Seven", "patience, investment, the long-term view", "impatience, lack of reward, poor investment"],
+    ["Eight", "diligence, mastery, craftsmanship", "perfectionism, lack of focus, mediocrity"],
+    ["Nine", "abundance, self-sufficiency, luxury", "overwork, superficiality, reckless spending"],
+    ["Ten", "legacy, wealth, family, tradition", "financial loss, instability, broken traditions"],
+    ["Page", "ambition, curiosity, a new venture", "lack of progress, procrastination, unrealistic goals"],
+    ["Knight", "diligence, routine, reliability", "boredom, stagnation, perfectionism"],
+    ["Queen", "nurturing, practicality, resourcefulness", "self-neglect, smothering, imbalance"],
+    ["King", "abundance, security, discipline", "materialism, stubbornness, poor financial decisions"],
+  ]),
+];
+
+function minorSuit(suit, symbol, entries) {
+  return entries.map(([rank, up, rev]) => ({
+    name: `${rank} of ${suit}`,
+    arcana: "minor",
+    suit,
+    num: rank,
+    symbol,
+    up,
+    rev,
+  }));
+}
