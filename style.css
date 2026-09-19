@@ -47,6 +47,26 @@ h1 {
   text-align: center;
 }
 
+.deck-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+  letter-spacing: 0.04em;
+}
+
+.deck-picker select {
+  background: var(--bg-alt);
+  color: var(--ink);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
 .stage {
   perspective: 1200px;
 }

@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Egyptian Tarot Draw</title>
+<title>Tarot Draw</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
-    <h1>Egyptian Tarot Draw</h1>
-    <p class="subtitle">Draw a single card from the Falconnier &amp; Wegener Egyptian Tarot (1896)</p>
+    <h1>Tarot Draw</h1>
+    <p class="subtitle">Draw a single card from a public-domain tarot deck</p>
+
+    <label class="deck-picker">
+      <span>Deck</span>
+      <select id="deck-select"></select>
+    </label>
 
     <div class="stage">
       <div class="card" id="card">
@@ -30,14 +35,13 @@
 
     <button id="draw-btn">Draw a card</button>
 
-    <p class="credit">
-      Card art: <em>Les XXII lames hermétiques du tarot divinatoire</em>,
-      R. Falconnier &amp; M.O. Wegener, 1896 — public domain, via
-      <a href="https://commons.wikimedia.org/wiki/Category:Egyptian_Tarot_(Falconnier)" target="_blank" rel="noopener">Wikimedia Commons</a>.
-    </p>
+    <p class="credit" id="credit"></p>
   </main>
 
-  <script src="cards.js"></script>
+  <script src="cards-egyptian.js"></script>
+  <script src="cards-rws.js"></script>
+  <script src="cards-solabusca.js"></script>
+  <script src="decks.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
