@@ -1,13 +1,27 @@
 :root {
-  --bg: #0d0a1a;
-  --bg-alt: #171232;
-  --gold: #c9a24b;
-  --gold-soft: #e6d5a3;
-  --ink: #f2ecdd;
-  --ink-dim: #b8afd4;
-  --card-w: 280px;
+  --bg: #f1ede3;
+  --paper: #fffdf8;
+  --ink: #14120f;
+  --ink-dim: #5c584e;
+  --line: #14120f;
+
+  --accent-egyptian: #dda100;
+  --accent-rws: #c81e1e;
+  --accent-solabusca: #1b4f9c;
+  --accent: var(--accent-rws);
+  --accent-text: #ffffff;
+
+  --card-w: 300px;
   --card-ratio: 0.56 / 1;
+
+  --font-display: "Jost", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 }
+
+body[data-deck="egyptian"] { --accent: var(--accent-egyptian); --accent-text: #14120f; }
+body[data-deck="rws"] { --accent: var(--accent-rws); --accent-text: #ffffff; }
+body[data-deck="solabusca"] { --accent: var(--accent-solabusca); --accent-text: #ffffff; }
 
 * { box-sizing: border-box; }
 
@@ -15,50 +29,68 @@ body {
   margin: 0;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  background: radial-gradient(ellipse at top, var(--bg-alt), var(--bg) 70%);
+  background: var(--bg);
   color: var(--ink);
-  font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
-  padding: 32px 16px;
+  font-family: var(--font-body);
+  padding: 56px 20px 64px;
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
   width: 100%;
+  max-width: 520px;
 }
 
 main.wide {
-  max-width: 1100px;
+  max-width: 1120px;
+}
+
+.mark {
+  display: block;
+}
+
+header.masthead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding-bottom: 22px;
+  border-bottom: 3px solid var(--line);
 }
 
 h1 {
   margin: 0;
-  font-size: 2.2rem;
-  letter-spacing: 0.12em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.4rem;
   text-transform: uppercase;
-  color: var(--gold-soft);
+  letter-spacing: 0.1em;
   text-align: center;
+  color: var(--ink);
 }
 
 .site-nav {
   display: flex;
-  gap: 20px;
+  gap: 28px;
   justify-content: center;
 }
 
 .site-nav a {
   color: var(--ink-dim);
   text-decoration: none;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding-bottom: 4px;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  padding-bottom: 6px;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .site-nav a:hover {
@@ -66,58 +98,76 @@ h1 {
 }
 
 .site-nav a.active {
-  color: var(--gold-soft);
-  border-color: var(--gold);
+  color: var(--ink);
+  border-color: var(--accent);
 }
 
 .reversed-toggle {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--ink-dim);
-  letter-spacing: 0.03em;
   cursor: pointer;
   user-select: none;
-  margin-top: -8px;
 }
 
 .reversed-toggle input {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--gold);
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  position: relative;
   cursor: pointer;
+  flex-shrink: 0;
+}
+
+.reversed-toggle input:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--ink);
 }
 
 .deck-picker {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 0;
+  border: 2px solid var(--ink);
 }
 
 .deck-btn {
-  background: transparent;
-  border: 1px solid rgba(201, 162, 75, 0.5);
-  color: var(--ink-dim);
-  padding: 8px 18px;
-  font-size: 0.8rem;
+  background: var(--paper);
+  border: none;
+  border-right: 2px solid var(--ink);
+  color: var(--ink);
+  padding: 10px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
   letter-spacing: 0.06em;
-  border-radius: 999px;
+  text-transform: uppercase;
   cursor: pointer;
-  font-family: inherit;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.deck-btn:last-child {
+  border-right: none;
 }
 
 .deck-btn:hover {
-  border-color: var(--gold);
-  color: var(--ink);
+  background: var(--bg);
 }
 
 .deck-btn.active {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: #14101f;
+  background: var(--accent);
+  color: var(--accent-text);
 }
 
 .stage {
@@ -129,16 +179,13 @@ h1 {
   aspect-ratio: var(--card-ratio);
   max-width: 80vw;
   cursor: pointer;
-  /* aspect-ratio is overridden inline once a card image's real
-     proportions are known, so the frame always hugs the art exactly
-     instead of leaving letterboxed gaps or cropping it. */
 }
 
 .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
 }
 
@@ -150,30 +197,36 @@ h1 {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
-  border-radius: 16px;
-  border: 2px solid var(--gold);
+  border: 2px solid var(--line);
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  background: var(--paper);
+  box-shadow: 8px 8px 0 var(--accent);
 }
 
 .card-back {
-  background:
-    repeating-linear-gradient(45deg, rgba(201,162,75,0.08) 0 10px, transparent 10px 20px),
-    linear-gradient(160deg, #241a4a, #12081f);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.back-symbol {
-  font-size: 3rem;
-  color: var(--gold);
-  opacity: 0.8;
+.back-mark {
+  width: 30%;
+  aspect-ratio: 1;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  position: relative;
+}
+
+.back-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 47%, var(--ink) 48.5%, var(--ink) 51.5%, transparent 53%);
 }
 
 .card-front {
   transform: rotateY(180deg);
-  background: #0d0a1a;
 }
 
 .card-image {
@@ -187,115 +240,132 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   max-width: 420px;
   text-align: center;
 }
 
 .card-num {
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.2em;
-  color: var(--gold);
+  color: var(--accent);
 }
 
 .card-name {
-  font-size: 1.25rem;
-  color: var(--gold-soft);
-  letter-spacing: 0.03em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
 }
 
 .card-orientation {
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   color: var(--ink-dim);
 }
 
 .card-meaning {
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.55;
   color: var(--ink);
-  font-style: italic;
 }
 
 #draw-btn {
-  background: transparent;
-  border: 1px solid var(--gold);
-  color: var(--gold-soft);
-  padding: 12px 32px;
-  font-size: 0.95rem;
-  letter-spacing: 0.1em;
+  background: var(--ink);
+  border: 2px solid var(--ink);
+  color: var(--paper);
+  padding: 14px 36px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-  font-family: inherit;
+  box-shadow: 6px 6px 0 var(--accent);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, color 0.12s ease;
 }
 
 #draw-btn:hover {
-  background: var(--gold);
-  color: #14101f;
+  background: var(--paper);
+  color: var(--ink);
 }
 
 #draw-btn:active {
-  transform: translateY(1px);
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 var(--accent);
 }
 
 .deck-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px;
   width: 100%;
 }
 
 .deck-card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: var(--bg-alt);
-  border: 1px solid rgba(201, 162, 75, 0.3);
-  border-radius: 12px;
-  padding: 12px;
+  gap: 10px;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  padding: 14px;
+  transition: box-shadow 0.15s ease;
+}
+
+.deck-card:hover {
+  box-shadow: 5px 5px 0 var(--accent);
 }
 
 .deck-card img {
   width: 100%;
   height: auto;
-  border-radius: 6px;
+  border: 1px solid var(--ink);
   display: block;
 }
 
 .deck-card-num {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--accent);
 }
 
 .deck-card-name {
+  font-family: var(--font-display);
+  font-weight: 600;
   font-size: 1rem;
-  color: var(--gold-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   line-height: 1.3;
+  color: var(--ink);
 }
 
 .deck-card-meanings p {
-  margin: 4px 0 0;
-  font-size: 0.78rem;
-  line-height: 1.45;
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
   color: var(--ink);
 }
 
 .deck-card-meanings .label {
   display: block;
-  color: var(--gold);
-  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 0.66rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 8px;
+  letter-spacing: 0.12em;
+  margin-top: 10px;
+  margin-bottom: 2px;
 }
 
 @media (max-width: 400px) {
   :root {
     --card-w: 240px;
   }
-  h1 { font-size: 1.7rem; }
+  h1 { font-size: 1.8rem; }
 }

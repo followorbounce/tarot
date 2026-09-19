@@ -4,10 +4,43 @@ A small static site (two pages) covering three complete public-domain
 tarot decks, each with its original scanned/engraved card art: a draw
 page, and a full-deck reference page.
 
+## Design
+Redesigned 2026-09-19 around early Bauhaus / late VKhUTEMAS constructivism,
+per explicit user reference — a full visual rewrite of `style.css` (HTML
+structure/ids mostly unchanged, so `script.js`/`deck-page.js` didn't need
+much touching):
+- **Type**: `Jost` (a Bauhaus/Kabel-inspired geometric sans) for display
+  text — headings, card names, buttons, all uppercase with wide tracking.
+  `IBM Plex Sans` for body copy (meanings). `IBM Plex Mono` for
+  labels/numbers/nav (card numerals, "Upright"/"Reversed", nav links) —
+  reads like stenciled catalog/index numbers. All three loaded from Google
+  Fonts.
+- **Color**: cream paper background (`--bg`), near-black ink, and one
+  functional accent color per deck rather than decoration — Egyptian =
+  ochre, RWS = red, Sola Busca = blue, each set via
+  `body[data-deck="..."]` (both `script.js` and `deck-page.js` write
+  `document.body.dataset.deck` whenever the deck selection changes). The
+  accent drives the active nav underline, active deck-button fill, the
+  card frame's hard-shadow color, and the draw button's shadow.
+- **Geometry**: sharp corners everywhere (`border-radius: 0`), 2px black
+  borders, flat offset "hard shadows" (`box-shadow: Npx Npx 0 var(--accent)`,
+  no blur) on the card frame and draw button instead of soft glows —
+  the draw button's shadow visually collapses on `:active` as the button
+  translates onto it, a period-appropriate press affordance.
+- **Mark**: a small inline SVG in the header — a red square, yellow
+  triangle, and blue circle in a row, after Kandinsky's Bauhaus color/form
+  theory (square=red, triangle=yellow, circle=blue). Also reused (as a
+  plain circle-with-diagonal-bar built in pure CSS, `.back-mark`) for the
+  card back, replacing the old ✦ glyph.
+- Deck-picker buttons are now a single bordered rectangular group (no
+  gaps/pill shapes), active state = solid accent fill.
+- The reversed-toggle checkbox is a custom square (`appearance: none` +
+  a CSS `::after` square when checked) instead of the OS-native checkbox.
+
 ## Pages
-- **`index.html` (Draw)** — deck-picker buttons, a "reversed cards" on/off toggle, a flip-card element (image fills the whole frame, edge to edge), a caption block below the card (number/name/orientation/meaning), and a "Draw a card" button. No subtitle text and no art-source credit line — both were deliberately removed.
-- **`deck.html` (Full Deck)** — the same deck-picker buttons, then a responsive grid of every card in the selected deck: thumbnail, number, name, and both upright/reversed meanings, all shown at once (a reference/browse page, not the draw interaction). Built as the first of the "worth planning" pages below.
-- Both pages share a `.site-nav` header (`Draw` / `Full Deck` links, hand-duplicated in each HTML file — no templating/build step exists to share it).
+- **`index.html` (Draw)** — a `.masthead` header (mark + title + nav) above a rule, deck-picker buttons, a "reversed cards" on/off toggle, a flip-card element (image fills the whole frame, edge to edge), a caption block below the card (number/name/orientation/meaning), and a "Draw a card" button. No subtitle text and no art-source credit line — both were deliberately removed earlier.
+- **`deck.html` (Full Deck)** — same masthead + deck-picker, then a responsive grid of every card in the selected deck: thumbnail, number, name, and both upright/reversed meanings, all shown at once (a reference/browse page, not the draw interaction). Built as the first of the "worth planning" pages below.
+- Both pages share the `.masthead`/`.site-nav` header markup (hand-duplicated in each HTML file — no templating/build step exists to share it).
 
 ## Planned pages (not yet built)
 The nav is meant to grow. Candidates, not yet started:
@@ -23,7 +56,7 @@ The nav is meant to grow. Candidates, not yet started:
 - Every card entry has `name`, `num`, `img` (path under `images/`), `up`/`rev` (upright/reversed meaning keywords).
 - `script.js` (draw page only) — builds the deck-picker buttons from `DECKS`, draw logic (random card from whichever deck is selected; reversed only possible when `#reversed-toggle` is checked), flips the card, swaps in the image and caption text.
 - `deck-page.js` (full-deck page only) — builds the same deck-picker buttons, then renders every card in the selected deck as a grid item with both meanings visible.
-- `style.css` — dark/gold mystical theme shared by both pages: 3D flip animation, full-bleed card image (`object-fit: cover`), pill-style deck buttons, nav styling, the reversed-toggle checkbox, the full-deck grid, responsive down to phone width.
+- `style.css` — the Bauhaus/constructivist theme described above, shared by both pages: 3D flip animation, `object-fit: contain` card image with dynamic aspect-ratio sizing, bordered-rectangle deck buttons, masthead/nav styling, the custom reversed-toggle checkbox, the full-deck grid, responsive down to phone width.
 - `images/egyptian/01.png`–`22.png`, `images/rws/major_00.jpg`…`wands_14.jpg` etc., `images/solabusca/00.jpg`–`77.jpg` — the three decks' original art, all public domain, all downloaded from Wikimedia Commons (~38MB total across all three decks).
 
 ## Deck details & sourcing

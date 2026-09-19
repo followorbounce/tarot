@@ -4,16 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Full Deck — Tarot Draw</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="wide">
-    <h1>Full Deck</h1>
-
-    <nav class="site-nav">
-      <a href="index.html">Draw</a>
-      <a href="deck.html" class="active">Full Deck</a>
-    </nav>
+    <header class="masthead">
+      <svg class="mark" viewBox="0 0 84 28" width="84" height="28" aria-hidden="true">
+        <rect x="1" y="1" width="26" height="26" fill="#c81e1e" stroke="#14120f" stroke-width="2"/>
+        <polygon points="43,1 57,27 29,27" fill="#dda100" stroke="#14120f" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="70" cy="14" r="13" fill="#1b4f9c" stroke="#14120f" stroke-width="2"/>
+      </svg>
+      <h1>Full Deck</h1>
+      <nav class="site-nav">
+        <a href="index.html">Draw</a>
+        <a href="deck.html" class="active">Full Deck</a>
+      </nav>
+    </header>
 
     <div class="deck-picker" id="deck-picker"></div>
 

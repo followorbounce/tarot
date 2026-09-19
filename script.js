@@ -9,6 +9,7 @@ const orientationEl = document.getElementById("card-orientation");
 const meaningEl = document.getElementById("card-meaning");
 
 let currentDeckKey = Object.keys(DECKS)[0];
+document.body.dataset.deck = currentDeckKey;
 
 for (const [key, deck] of Object.entries(DECKS)) {
   const btn = document.createElement("button");
@@ -21,6 +22,7 @@ for (const [key, deck] of Object.entries(DECKS)) {
 
 function selectDeck(key) {
   currentDeckKey = key;
+  document.body.dataset.deck = key;
   for (const btn of deckPicker.children) {
     btn.classList.toggle("active", btn.dataset.deck === key);
   }
