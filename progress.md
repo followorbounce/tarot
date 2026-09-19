@@ -58,8 +58,11 @@ Built and verified 2026-09-18. Single-page static site, no build step.
   - Created `github.com/followorbounce/tarot` (private) via `gh repo create --source=. --remote=origin --push`; all 6 commits pushed to `main`, remote tracking set up.
   - This access is account-wide (SSH key) and machine-wide (`gh` token), not scoped to this one repo — full push/create access to any of the user's GitHub repos from this environment going forward.
 
+- **2026-09-19 — Made the repo public and enabled GitHub Pages.** User asked for both. `gh repo edit --visibility public --accept-visibility-change-consequences`, then `gh api -X POST repos/followorbounce/tarot/pages -f "source[branch]=main" -f "source[path]=/"`. Live at https://followorbounce.github.io/tarot/ once the first Pages build finishes (checked via `gh api repos/followorbounce/tarot/pages/builds/latest`; was still "building" as of this write-up).
+
 ## Next steps
-- Pushed to `github.com/followorbounce/tarot` (private, 2026-09-18) — see below.
+- Confirm the Pages build finished and the live site actually looks right (haven't loaded it in a real browser this session at all, on top of the already-noted lack of browser access — worth an end-to-end check now that it's genuinely public).
+- Now that the repo is public: the ~38MB of unoptimized Commons images (next bullet) matters more than it did as a private/local project — worth actually compressing before pointing anyone at the live link.
 - Images are unoptimized originals from Commons (~38MB total across all three decks now) — fine for a local/personal site, but worth compressing before any public deploy.
 - Sola Busca's 56 suit cards have their own unique inscribed court-card names (only a few were spot-checked: Natanabo, Polisena, Lucio Cecilio for the Cups court) — if you want those surfaced instead of generic "Page/Knight/Queen/King of X" labels, that'd need one-by-one research or OCR across all 56 images.
 - The "planned pages" list in CLAUDE.md (Spreads, About/sourcing, Journal) is just a list right now — say which one to build next, if any.

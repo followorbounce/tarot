@@ -43,4 +43,4 @@ The nav is meant to grow. Candidates, not yet started:
 - All card art is verified public domain and sourced from Wikimedia Commons (sourcing details are tracked here in CLAUDE.md, not shown on-page — the user asked for the on-page credit line to be removed).
 
 ## Deploy
-Pushed to `git@github.com:followorbounce/tarot.git` (private repo, `main` branch). No hosting/CI configured — it's just source control, not a live deploy.
+Pushed to `git@github.com:followorbounce/tarot.git` (**public** repo, `main` branch). GitHub Pages enabled, serving from `main` root — live at https://followorbounce.github.io/tarot/. No CI/build step; every push to `main` is live as-is.
