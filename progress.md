@@ -41,9 +41,14 @@ Built and verified 2026-09-18. Single-page static site, no build step.
   - Verified: bracket balance in all touched/new files, all six files (`index.html`, `deck.html`, `style.css`, `script.js`, `deck-page.js`, `decks.js`) serve over a local test server, and grep confirmed every new element id referenced in JS has a matching id in its HTML file (and vice versa) with no leftovers.
   - Still no real-browser test this session — worth checking the toggle's checkbox styling, that the nav's active-link state looks right on both pages, and that the Full Deck grid reads well at a few different widths (it's `auto-fill, minmax(170px, 1fr)`, untested visually).
 
+- **2026-09-18 (same day) — Switched card images from `cover` to `contain`.** User reported the frame was cropping card edges on both the draw page and the Full Deck grid; asked for the frame to round corners only, never crop any side.
+  - `.card-image` (draw page) and `.deck-card img` (Full Deck grid) both changed from `object-fit: cover` to `object-fit: contain`.
+  - Added an explicit `background: var(--bg)` on `.deck-card img` so the letterbox gaps left by `contain` (when a card's aspect ratio doesn't exactly match the fixed frame) read as intentional dark space rather than a blank/white gap; the draw-page card frame already had a dark `.card-front` background doing the same job.
+  - Verified the CSS still parses/serves correctly over a local test server; this is a CSS-only change, no HTML/JS touched.
+
 ## Next steps
 - No git remote yet.
 - Images are unoptimized originals from Commons (~38MB total across all three decks now) — fine for a local/personal site, but worth compressing before any public deploy.
 - Sola Busca's 56 suit cards have their own unique inscribed court-card names (only a few were spot-checked: Natanabo, Polisena, Lucio Cecilio for the Cups court) — if you want those surfaced instead of generic "Page/Knight/Queen/King of X" labels, that'd need one-by-one research or OCR across all 56 images.
-- With `object-fit: cover`, source images with differing aspect ratios (Egyptian ~0.52, RWS ~0.57, Sola Busca varies per card) will each get cropped slightly differently to fill the fixed card frame — worth a visual check across all three decks to confirm nothing important gets cropped off (e.g. card borders/title text baked into the source scan). Same `cover` cropping now also applies to the Full Deck grid thumbnails.
 - The "planned pages" list in CLAUDE.md (Spreads, About/sourcing, Journal) is just a list right now — say which one to build next, if any.
+- With `object-fit: contain`, cards will now show visible letterbox bars on whichever side doesn't match the frame's aspect ratio (since the three decks' source scans all have slightly different proportions) — that's the deliberate tradeoff for "never crop"; flag it if the letterboxing itself looks bad once you see it in a real browser.
