@@ -1,6 +1,7 @@
 const cardEl = document.getElementById("card");
 const drawBtn = document.getElementById("draw-btn");
 const deckPicker = document.getElementById("deck-picker");
+const reversedToggle = document.getElementById("reversed-toggle");
 const imageEl = document.getElementById("card-image");
 const numEl = document.getElementById("card-num");
 const nameEl = document.getElementById("card-name");
@@ -30,7 +31,7 @@ function selectDeck(key) {
 function drawCard() {
   const deck = DECKS[currentDeckKey];
   const card = deck.cards[Math.floor(Math.random() * deck.cards.length)];
-  const reversed = Math.random() < 0.5;
+  const reversed = reversedToggle.checked && Math.random() < 0.5;
 
   cardEl.classList.remove("flipped");
 

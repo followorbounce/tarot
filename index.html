@@ -10,7 +10,17 @@
   <main>
     <h1>Tarot Draw</h1>
 
+    <nav class="site-nav">
+      <a href="index.html" class="active">Draw</a>
+      <a href="deck.html">Full Deck</a>
+    </nav>
+
     <div class="deck-picker" id="deck-picker"></div>
+
+    <label class="reversed-toggle">
+      <input type="checkbox" id="reversed-toggle" checked>
+      <span>Allow reversed cards</span>
+    </label>
 
     <div class="stage">
       <div class="card" id="card">
