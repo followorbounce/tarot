@@ -26,6 +26,7 @@ function selectDeck(key) {
   }
   cardEl.classList.remove("flipped");
   cardEl.style.transform = "rotate(0deg)";
+  cardEl.style.aspectRatio = "";
 }
 
 function drawCard() {
@@ -37,14 +38,21 @@ function drawCard() {
 
   // Let the back-face show briefly before revealing the new card.
   setTimeout(() => {
-    imageEl.src = card.img;
-    imageEl.alt = card.name;
-    numEl.textContent = card.num;
-    nameEl.textContent = card.name;
-    orientationEl.textContent = reversed ? "Reversed" : "Upright";
-    meaningEl.textContent = reversed ? card.rev : card.up;
-    cardEl.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
-    cardEl.classList.add("flipped");
+    // Preload off-screen so the frame can be sized to the image's real
+    // proportions (no cropping, no letterbox gaps) before it's shown.
+    const preload = new Image();
+    preload.onload = () => {
+      cardEl.style.aspectRatio = `${preload.naturalWidth} / ${preload.naturalHeight}`;
+      imageEl.src = card.img;
+      imageEl.alt = card.name;
+      numEl.textContent = card.num;
+      nameEl.textContent = card.name;
+      orientationEl.textContent = reversed ? "Reversed" : "Upright";
+      meaningEl.textContent = reversed ? card.rev : card.up;
+      cardEl.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
+      cardEl.classList.add("flipped");
+    };
+    preload.src = card.img;
   }, 250);
 }
 

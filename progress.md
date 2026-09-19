@@ -46,9 +46,15 @@ Built and verified 2026-09-18. Single-page static site, no build step.
   - Added an explicit `background: var(--bg)` on `.deck-card img` so the letterbox gaps left by `contain` (when a card's aspect ratio doesn't exactly match the fixed frame) read as intentional dark space rather than a blank/white gap; the draw-page card frame already had a dark `.card-front` background doing the same job.
   - Verified the CSS still parses/serves correctly over a local test server; this is a CSS-only change, no HTML/JS touched.
 
+- **2026-09-18 (same day) — Eliminated the letterbox gaps from the `contain` fix.** User reported the `contain` change left visible black empty space around cards (expected, since the fixed-size frame no longer matched every image's aspect ratio). Fixed properly instead of trading one visual problem for another:
+  - Draw page: `.card`'s height is no longer fixed (`--card-h` removed). It now uses `aspect-ratio` (a `--card-ratio` default for the initial card-back state), which `script.js` overrides inline to the *exact* natural aspect ratio of whichever image was just drawn — computed by preloading the image off-screen (`new Image()`, read `naturalWidth`/`naturalHeight` in `onload`) before swapping it into the visible `<img>` and flipping. The frame now hugs each card's real proportions exactly: no cropping, no gaps.
+  - `selectDeck()` resets `cardEl.style.aspectRatio` back to the CSS default when switching decks, so the frame doesn't stay sized to the previous deck's last-drawn card.
+  - Full Deck grid: dropped the fixed `aspect-ratio: 3/5` + `object-fit` + dark-background workaround entirely. Thumbnails are now just `width: 100%; height: auto` — each renders at its own natural proportions, so grid rows are slightly uneven height card-to-card (normal for a card gallery), but there is no cropping and no letterboxing anywhere.
+  - Verified: bracket balance, all files still serve over a local test server, grep confirmed no leftover `--card-h` references.
+
 ## Next steps
 - No git remote yet.
 - Images are unoptimized originals from Commons (~38MB total across all three decks now) — fine for a local/personal site, but worth compressing before any public deploy.
 - Sola Busca's 56 suit cards have their own unique inscribed court-card names (only a few were spot-checked: Natanabo, Polisena, Lucio Cecilio for the Cups court) — if you want those surfaced instead of generic "Page/Knight/Queen/King of X" labels, that'd need one-by-one research or OCR across all 56 images.
 - The "planned pages" list in CLAUDE.md (Spreads, About/sourcing, Journal) is just a list right now — say which one to build next, if any.
-- With `object-fit: contain`, cards will now show visible letterbox bars on whichever side doesn't match the frame's aspect ratio (since the three decks' source scans all have slightly different proportions) — that's the deliberate tradeoff for "never crop"; flag it if the letterboxing itself looks bad once you see it in a real browser.
+- Still no real-browser test this session — the dynamic aspect-ratio resize on draw is the one piece of behavior here that's genuinely hard to fully verify without seeing it animate; worth confirming the card frame resize doesn't look jarring right as it flips open.

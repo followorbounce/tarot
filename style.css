@@ -6,7 +6,7 @@
   --ink: #f2ecdd;
   --ink-dim: #b8afd4;
   --card-w: 280px;
-  --card-h: 460px;
+  --card-ratio: 0.56 / 1;
 }
 
 * { box-sizing: border-box; }
@@ -126,9 +126,12 @@ h1 {
 
 .card {
   width: var(--card-w);
-  height: var(--card-h);
+  aspect-ratio: var(--card-ratio);
   max-width: 80vw;
   cursor: pointer;
+  /* aspect-ratio is overridden inline once a card image's real
+     proportions are known, so the frame always hugs the art exactly
+     instead of leaving letterboxed gaps or cropping it. */
 }
 
 .card-inner {
@@ -257,9 +260,7 @@ h1 {
 
 .deck-card img {
   width: 100%;
-  aspect-ratio: 3 / 5;
-  object-fit: contain;
-  background: var(--bg);
+  height: auto;
   border-radius: 6px;
   display: block;
 }
@@ -295,7 +296,6 @@ h1 {
 @media (max-width: 400px) {
   :root {
     --card-w: 240px;
-    --card-h: 400px;
   }
   h1 { font-size: 1.7rem; }
 }
