@@ -52,8 +52,14 @@ Built and verified 2026-09-18. Single-page static site, no build step.
   - Full Deck grid: dropped the fixed `aspect-ratio: 3/5` + `object-fit` + dark-background workaround entirely. Thumbnails are now just `width: 100%; height: auto` — each renders at its own natural proportions, so grid rows are slightly uneven height card-to-card (normal for a card gallery), but there is no cropping and no letterboxing anywhere.
   - Verified: bracket balance, all files still serve over a local test server, grep confirmed no leftover `--card-h` references.
 
+- **2026-09-18 (same day) — Set up full GitHub access for this environment and pushed.** User asked to configure everything needed for full access, then to create the repo and push. This was previously blocked (see `[[no-git-credentials-in-env]]` in memory) — that constraint is now lifted for this machine specifically.
+  - Generated a passphrase-less `ed25519` SSH key (`~/.ssh/id_ed25519_github`), added `~/.ssh/config` pointing `github.com` at it. User added the public key to their GitHub account; verified with `ssh -T git@github.com` → authenticated as `followorbounce`.
+  - Installed `gh` CLI (`sudo dnf install -y gh`, run by the user) and authenticated via `gh auth login --web` (device-code flow — user completed the browser step); confirmed `repo` scope.
+  - Created `github.com/followorbounce/tarot` (private) via `gh repo create --source=. --remote=origin --push`; all 6 commits pushed to `main`, remote tracking set up.
+  - This access is account-wide (SSH key) and machine-wide (`gh` token), not scoped to this one repo — full push/create access to any of the user's GitHub repos from this environment going forward.
+
 ## Next steps
-- No git remote yet.
+- Pushed to `github.com/followorbounce/tarot` (private, 2026-09-18) — see below.
 - Images are unoptimized originals from Commons (~38MB total across all three decks now) — fine for a local/personal site, but worth compressing before any public deploy.
 - Sola Busca's 56 suit cards have their own unique inscribed court-card names (only a few were spot-checked: Natanabo, Polisena, Lucio Cecilio for the Cups court) — if you want those surfaced instead of generic "Page/Knight/Queen/King of X" labels, that'd need one-by-one research or OCR across all 56 images.
 - The "planned pages" list in CLAUDE.md (Spreads, About/sourcing, Journal) is just a list right now — say which one to build next, if any.
