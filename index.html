@@ -9,12 +9,8 @@
 <body>
   <main>
     <h1>Tarot Draw</h1>
-    <p class="subtitle">Draw a single card from a public-domain tarot deck</p>
 
-    <label class="deck-picker">
-      <span>Deck</span>
-      <select id="deck-select"></select>
-    </label>
+    <div class="deck-picker" id="deck-picker"></div>
 
     <div class="stage">
       <div class="card" id="card">
@@ -24,18 +20,19 @@
           </div>
           <div class="card-face card-front">
             <img class="card-image" id="card-image" alt="">
-            <div class="card-num" id="card-num"></div>
-            <div class="card-name" id="card-name"></div>
-            <div class="card-orientation" id="card-orientation"></div>
-            <div class="card-meaning" id="card-meaning"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <button id="draw-btn">Draw a card</button>
+    <div class="caption">
+      <div class="card-num" id="card-num"></div>
+      <div class="card-name" id="card-name"></div>
+      <div class="card-orientation" id="card-orientation"></div>
+      <div class="card-meaning" id="card-meaning"></div>
+    </div>
 
-    <p class="credit" id="credit"></p>
+    <button id="draw-btn">Draw a card</button>
   </main>
 
   <script src="cards-egyptian.js"></script>

@@ -26,7 +26,15 @@ Built and verified 2026-09-18. Single-page static site, no build step.
   - Verified: bracket/brace balance and correct entry counts (22+56=78) in both new card files via grep/awk (still no `node` in this environment), every generated minor-arcana image path checked to actually exist on disk via a small Python script, and two RWS images (`major_00.jpg`, `cups_11.jpg`) opened and visually confirmed to be "The Fool" and "Page of Cups" respectively, matching their data entries exactly.
   - Still no real-browser test available this session — worth checking that the deck `<select>` styling looks right and that switching decks mid-session behaves as expected (resets to the card back, doesn't carry over the wrong deck's image).
 
+- **2026-09-18 (same day) — Layout overhaul.** User asked for: card image filling the whole frame edge-to-edge, captions moved below the frame instead of overlaid on it, deck picker as buttons instead of a `<select>`, the subtitle line removed, and the on-page art-source credit removed entirely.
+  - `card-front` is now just the `<img>` at `object-fit: cover`, no padding/border around it, no text inside the flip card at all.
+  - Name/number/orientation/meaning moved to a new `.caption` block under `.stage`.
+  - Deck picker is now a row of pill buttons (`.deck-btn`, one `.active` at a time) built from `DECKS` in `script.js`, replacing the earlier `<select>`.
+  - Removed `CREDITS` object and all credit-line code/markup from `script.js`/`index.html`/`style.css`. Sourcing info is preserved in this file and in CLAUDE.md — just not shown on the page anymore.
+  - Verified: no leftover references to the removed `subtitle`/`credit`/`deck-select` ids/classes anywhere in the three files (grep came back clean), bracket balance in `script.js`, all three files still serve over a local test server.
+
 ## Next steps
 - No git remote yet.
 - Images are unoptimized originals from Commons (~38MB total across all three decks now) — fine for a local/personal site, but worth compressing before any public deploy.
 - Sola Busca's 56 suit cards have their own unique inscribed court-card names (only a few were spot-checked: Natanabo, Polisena, Lucio Cecilio for the Cups court) — if you want those surfaced instead of generic "Page/Knight/Queen/King of X" labels, that'd need one-by-one research or OCR across all 56 images.
+- With `object-fit: cover`, source images with differing aspect ratios (Egyptian ~0.52, RWS ~0.57, Sola Busca varies per card) will each get cropped slightly differently to fill the fixed card frame — worth a visual check across all three decks to confirm nothing important gets cropped off (e.g. card borders/title text baked into the source scan).
