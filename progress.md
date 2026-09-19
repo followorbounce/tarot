@@ -67,6 +67,8 @@ Built and verified 2026-09-18. Single-page static site, no build step.
   - Verified: bracket balance in all touched files, no leftover references to the removed star glyph, all files still serve correctly, and confirmed the Google Fonts URL used actually resolves (HTTP 200) rather than assuming it would.
   - Still no real-browser test this session (same standing limitation) — this is the highest-value thing to check next, since it's a from-scratch visual system: verify the hard-shadow/press interaction on the draw button, that the per-deck accent color actually swaps live when switching decks, and that Jost/Plex fonts are loading (not silently falling back to system sans) once it's live on GitHub Pages.
 
+- 2026-09-19 — Added a Cloudflare Web Analytics beacon (cross-repo rollout across every deployed followorbounce/client site; this repo shares the `followorbounce.github.io` Web Analytics site). See `[[cloudflare-analytics-setup]]` in the assistant's memory for the account/token map.
+
 ## Next steps
 - Confirm the redesign actually looks right in a real browser — genuinely can't verify this from here beyond "the CSS parses and fonts resolve."
 - Images are unoptimized originals from Commons (~38MB total across all three decks now) — fine for a local/personal site, but worth compressing now that the repo is public and on Pages.

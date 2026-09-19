@@ -77,3 +77,6 @@ The nav is meant to grow. Candidates, not yet started:
 
 ## Deploy
 Pushed to `git@github.com:followorbounce/tarot.git` (**public** repo, `main` branch). GitHub Pages enabled, serving from `main` root — live at https://followorbounce.github.io/tarot/. No CI/build step; every push to `main` is live as-is.
+
+## Analytics
+Cloudflare Web Analytics beacon added 2026-09-19, shares the `followorbounce.github.io` Web Analytics site (see `[[cloudflare-analytics-setup]]` in memory).
