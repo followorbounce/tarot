@@ -321,6 +321,10 @@ h1 {
   box-shadow: 5px 5px 0 var(--accent);
 }
 
+.deck-card picture {
+  display: block;
+}
+
 .deck-card img {
   width: 100%;
   height: auto;

@@ -42,10 +42,17 @@ function drawCard() {
   setTimeout(() => {
     // Preload off-screen so the frame can be sized to the image's real
     // proportions (no cropping, no letterbox gaps) before it's shown.
+    // WebP first (much smaller); fall back to the original scan if it fails.
     const preload = new Image();
+    preload.onerror = () => {
+      if (preload.src.endsWith(".webp") && card.webp !== card.img) {
+        preload.onerror = null;
+        preload.src = card.img;
+      }
+    };
     preload.onload = () => {
       cardEl.style.aspectRatio = `${preload.naturalWidth} / ${preload.naturalHeight}`;
-      imageEl.src = card.img;
+      imageEl.src = preload.src;
       imageEl.alt = card.name;
       numEl.textContent = card.num;
       nameEl.textContent = card.name;
@@ -54,7 +61,7 @@ function drawCard() {
       cardEl.style.transform = reversed ? "rotate(180deg)" : "rotate(0deg)";
       cardEl.classList.add("flipped");
     };
-    preload.src = card.img;
+    preload.src = card.webp || card.img;
   }, 250);
 }
 

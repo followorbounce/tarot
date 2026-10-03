@@ -28,7 +28,7 @@ function renderGrid() {
     const item = document.createElement("div");
     item.className = "deck-card";
     item.innerHTML = `
-      <img src="${card.img}" alt="${card.name}" loading="lazy">
+      <picture><source srcset="${card.webp}" type="image/webp"><img src="${card.img}" alt="${card.name}" loading="lazy"></picture>
       <div class="deck-card-num">${card.num}</div>
       <div class="deck-card-name">${card.name}</div>
       <div class="deck-card-meanings">

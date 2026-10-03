@@ -69,8 +69,10 @@ Built and verified 2026-09-18. Single-page static site, no build step.
 
 - 2026-09-19 — Added a Cloudflare Web Analytics beacon (cross-repo rollout across every deployed followorbounce/client site; this repo shares the `followorbounce.github.io` Web Analytics site). See `[[cloudflare-analytics-setup]]` in the assistant's memory for the account/token map.
 
+- **2026-10-02 — WebP versions of every card image (not committed).** ImageMagick 7.1.2: `-resize 1200x1200> -quality 82 -define webp:method=6`, written next to each original (178 files; originals kept). Size: originals 37.9 MB (33.4 MB jpg + 4.5 MB png) -> WebP 24.2 MB (-36%); per deck egyptian 4.4->1.4 MB, rws 22->15 MB, solabusca 11->7.6 MB; every WebP is smaller than its original. `decks.js` adds `card.webp` per card; `deck.html` grid uses `<picture>` (WebP source, original `<img>` fallback); the draw page preloads the WebP and falls back to the original on error. All 178 `img`/`webp` paths verified to exist. Repo grows by ~24 MB because originals are kept as fallback; dropping them later is a separate decision.
+
 ## Next steps
 - Confirm the redesign actually looks right in a real browser — genuinely can't verify this from here beyond "the CSS parses and fonts resolve."
-- Images are unoptimized originals from Commons (~38MB total across all three decks now) — fine for a local/personal site, but worth compressing now that the repo is public and on Pages.
+- ~~Images are unoptimized originals~~ — WebP versions added 2026-10-02 (24 MB vs 38 MB); remaining option: drop or move the originals out of the deployed tree.
 - Sola Busca's 56 suit cards have their own unique inscribed court-card names (only a few were spot-checked: Natanabo, Polisena, Lucio Cecilio for the Cups court) — if you want those surfaced instead of generic "Page/Knight/Queen/King of X" labels, that'd need one-by-one research or OCR across all 56 images.
 - The "planned pages" list in CLAUDE.md (Spreads, About/sourcing, Journal) is just a list right now — say which one to build next, if any.
