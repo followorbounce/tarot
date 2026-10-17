@@ -76,3 +76,6 @@ Built and verified 2026-09-18. Single-page static site, no build step.
 - ~~Images are unoptimized originals~~ — WebP versions added 2026-10-02 (24 MB vs 38 MB); remaining option: drop or move the originals out of the deployed tree.
 - Sola Busca's 56 suit cards have their own unique inscribed court-card names (only a few were spot-checked: Natanabo, Polisena, Lucio Cecilio for the Cups court) — if you want those surfaced instead of generic "Page/Knight/Queen/King of X" labels, that'd need one-by-one research or OCR across all 56 images.
 - The "planned pages" list in CLAUDE.md (Spreads, About/sourcing, Journal) is just a list right now — say which one to build next, if any.
+
+## 2026-10-16 — Index infrastructure
+- added missing canonical URL, description where absent, Open Graph and twitter:card tags. The host-level robots.txt / sitemap index / llms.txt live in followorbounce.github.io.
